@@ -2,6 +2,7 @@
 #define BALA_H
 
 #include "canon.h"
+#include "math.h"
 
 class Bala
 {
@@ -23,8 +24,14 @@ public:
                                  // pasando un true si es defensivo o false
                                  // si ofensivo.
 
-    bool impacto (int x, int y);
+    bool impacto (int x, int y,float Xb,float Yb, int R);
 
+    float getRang() const;
+    float getAngle() const;
+    float getXi() const;
+    void setXi(float value);
+    float getYi() const;
+    void setYi(float value);
 };
 
 #endif // BALA_H
