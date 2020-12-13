@@ -1,35 +1,5 @@
 #include "bala.h"
 
-float Bala::getRang() const
-{
-    return Rang;
-}
-
-float Bala::getAngle() const
-{
-    return Angle;
-}
-
-float Bala::getXi() const
-{
-    return Xi;
-}
-
-void Bala::setXi(float value)
-{
-    Xi = value;
-}
-
-float Bala::getYi() const
-{
-    return Yi;
-}
-
-void Bala::setYi(float value)
-{
-    Yi = value;
-}
-
 Bala::Bala(int x, int y, bool type)
 {
     Xi=x;
@@ -42,7 +12,7 @@ Bala::Bala(int x, int y, bool type)
         Rang=0.05*800;
 }
 
-bool Bala::impacto(int x, int y,float Xb,float Yb, int R)
+bool Bala::impacto(int x, int y,float Xb,float Yb, int R) //Distancia entre dos puntos
 {
     bool flag= false;
 
@@ -51,4 +21,9 @@ bool Bala::impacto(int x, int y,float Xb,float Yb, int R)
     }
 
     return flag;
+}
+
+float Bala::getRang() const
+{
+    return Rang;
 }
