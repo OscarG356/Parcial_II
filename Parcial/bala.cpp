@@ -36,10 +36,10 @@ Bala::Bala(int x, int y, bool type)
     Yi=y;
 
     if(type){
-        Rang=0.025*x;
+        Rang=0.025*800;
     }
     else
-        Rang=0.05*x;
+        Rang=0.05*800;
 }
 
 bool Bala::impacto(int x, int y,float Xb,float Yb, int R)
