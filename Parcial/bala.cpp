@@ -14,5 +14,19 @@ Bala::Bala(int x, int y, bool type)
 
 bool Bala::impacto(int x, int y)
 {
+    bool flag;
 
+    if(Xi+Rang>=x && Xi-Rang<=x){
+        flag=true;
+
+    }
+    else
+        flag=false;
+    if(Yi+Rang>=y && Yi-Rang<=y){
+        flag=true;
+    }
+    else
+        flag=false;
+
+    return flag;
 }
