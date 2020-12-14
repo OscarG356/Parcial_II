@@ -30,7 +30,6 @@ int main()
         cout<<"2) Generar disparos defensivos que comprometan la integridad del canon ofensivo.\n"<<endl;
         cout<<"3) Dado un disparo ofensivo, generar disparos defensivos que impida que el canon \ndefensivo sea destruido sin importar si el canon ofensivo pueda ser destruido.\n"<<endl;
         cout<<"4) Dado un disparo ofensivo, generar disparo defensivos que impidan que los canones \ndefensivo y ofensivo puedan ser destruidos.\n"<<endl;
-        cout<<"5) Dado un disparo ofensivo efectivo y un disparo defensivo que comprometa la \nefectividad del ataque ofensivo, generar disparos que neutralicen el ataque defensivo \ny permitan que el ataque ofensivo sea efectivo.\n"<<endl;
         cout<<endl<<"Ingrese su opcion: ";
         cin>>opc;
 
@@ -104,7 +103,7 @@ void DisparoOfensivo(int Xd,int Yd,int Xo, int Yo)
     int VI0 = 0;
     int t = 0;
     int angle = 0;
-    for(VI0 = VIo;VI0==1000; VI0 += 5){
+    for(VI0 = VIo;VI0<1000; VI0 += 5){
         for(angle = 0; angle < 90; angle++){
             Vx = VI0*cos(angle*pi/180);
             Vy = VI0*sin(angle*pi/180);
@@ -150,7 +149,7 @@ void DisparoDefensivo(int Xo,int Yo,int Xd, int Yd)
     int VI0 = 0;
     int t = 0;
     int angle = 0;
-    for(VI0 = VIo;VI0==1000; VI0 += 5){
+    for(VI0 = VIo;VI0<1000; VI0 += 5){
         for(angle = 0; angle < 90; angle++){
             Vx = VI0*cos(angle+90*pi/180);
             Vy = VI0*sin(angle+90*pi/180);
@@ -198,7 +197,7 @@ void DisparoDefensivo2(int Yo,int Xd, int Yd, int Angl, int Vo0)
     int angle = 0;
     Vx1 = Vo0*cos((Angl)*pi/180);
     Vy2 = Vo0*sin((Angl)*pi/180);
-    for(VI0 = VIo;VI0==1000; VI0 += 5){
+    for(VI0 = VIo;VI0<1000; VI0 += 5){
         for(angle = 0; angle < 90; angle++){
             Vx = VI0*cos(angle+90*pi/180);
             Vy = VI0*sin(angle+90*pi/180);
@@ -259,7 +258,7 @@ void DisparoDefensivo3(int Xo,int Yo,int Xd, int Yd, int Angl, int Vo0){
             for(t = 0; ; t++){
                 x2 = Vx2*(t+2);
                 y2 = Yo + Vy2*(t+2) -(0.5*G*(t+2)*(t+2));
-                x = Xd+Vx1*t;
+                x = Xd-Vx1*t;
                 y = Yd + Vy1*t -(0.5*G*t*t);
                 for(int t2 = t; ;t2++){
                     aux = Xd+Vx1*t2;
