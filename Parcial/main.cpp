@@ -10,6 +10,7 @@ using namespace std;
 
 void print(int,int,float,float,int);
 void DisparoOfensivo(int, int, int, int);
+void DisparoDefensivo(int, int, int, int);
 
 int main()
 {    
@@ -34,6 +35,12 @@ int main()
         switch (opc) {
         case 1:{
             DisparoOfensivo(defensivo->getD(),defensivo->getHi(),0,ofensivo->getHi());
+            system("pause");
+            system("cls");
+        }
+            break;
+        case 2:{
+            DisparoDefensivo(ofensivo->getD(),ofensivo->getHi(),defensivo->getD(),defensivo->getHi());
             system("pause");
             system("cls");
         }
@@ -71,7 +78,7 @@ void DisparoOfensivo(int Xd,int Yd,int Xo, int Yo)
     int VI0 = 0;
     int t = 0;
     int angle = 0;
-    for(VI0 = VIo; ; VI0 += 5){
+    for(VI0 = VIo;VI0==1000; VI0 += 5){
         for(angle = 0; angle < 90; angle++){
             Vx = VI0*cos(angle*pi/180);
             Vy = VI0*sin(angle*pi/180);
@@ -82,6 +89,52 @@ void DisparoOfensivo(int Xd,int Yd,int Xo, int Yo)
                 y = Yo + Vy*t -(0.5*G*t*t);
                 float Rang=disparo->getRang();
                 if(disparo->impacto(x,y,Xd,Yd,Rang)){
+                    if(y<0) y = 0;
+                    print(VI0,t,x,y,angle);
+                    flag += 1;
+                    VI0 += 50;
+                    break;
+                }
+                if(y < 0){
+                    break;
+                }
+            }
+            if(flag == 3) break;
+
+        }
+        if(flag == 3) break;
+    }
+    if(flag != 3){
+        cout << "No impacto en los disparos esperados"<< endl;
+    }
+}
+
+void DisparoDefensivo(int Xo,int Yo,int Xd, int Yd)
+{
+
+    Bala *disparo = new Bala(Xd,Yd,true); //disparo
+
+    int VIo;
+    cout << "Ingrese Vo desde la cual quiere probar: ";
+    cin >> VIo;
+
+    int flag = 0;
+    float x,y;
+    float Vx,Vy;
+    int VI0 = 0;
+    int t = 0;
+    int angle = 0;
+    for(VI0 = VIo;VI0==1000; VI0 += 5){
+        for(angle = 0; angle < 90; angle++){
+            Vx = VI0*cos(angle+90*pi/180);
+            Vy = VI0*sin(angle+90*pi/180);
+            x = 0.0;
+            y = 0.0;
+            for(t = 0; ; t++){
+                x = Vx*t;
+                y = Yo + Vy*t -(0.5*G*t*t);
+                float Rang=disparo->getRang();
+                if(disparo->impacto(x,y,Xo,Yo,Rang)){
                     if(y<0) y = 0;
                     print(VI0,t,x,y,angle);
                     flag += 1;
