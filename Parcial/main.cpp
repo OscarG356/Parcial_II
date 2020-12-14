@@ -11,6 +11,7 @@ using namespace std;
 void print(int,int,float,float,int);
 void DisparoOfensivo(int, int, int, int);
 void DisparoDefensivo(int, int, int, int);
+void DisparoDefensivo2(int ,int , int , int , int);
 
 int main()
 {    
@@ -45,6 +46,21 @@ int main()
             system("cls");
         }
             break;
+        case 3:{
+            DisparoDefensivo2(ofensivo->getHi(),defensivo->getD(),defensivo->getHi(),31,85);
+            system("pause");
+            system("cls");
+        }
+        case 0:{
+            system("cls");
+            cout<<"***Hasta luego***"<<endl;
+            simulacion=false;
+        }
+        default:{
+            cout<<"***Opcion invalida"<<endl;
+            system("pause");
+            system("cls");
+        }
 
         }
     }
@@ -155,3 +171,54 @@ void DisparoDefensivo(int Xo,int Yo,int Xd, int Yd)
     }
 }
 
+void DisparoDefensivo2(int Yo,int Xd, int Yd, int Angl, int Vo0)
+{
+
+    Bala *disparo_d = new Bala(Xd,Yd,true); //disparo
+
+    int VIo;
+    cout << "Ingrese Vo desde la cual quiere probar: ";
+    cin >> VIo;
+
+    int flag = 0;
+    float x,y,x2,y2;
+    float Vx,Vy,Vx1,Vy2;
+    int VI0 = 0;
+    int t = 0;
+    int angle = 0;
+    Vx1 = Vo0*cos((Angl)*pi/180);
+    Vy2 = Vo0*sin((Angl)*pi/180);
+    for(VI0 = VIo;VI0==1000; VI0 += 5){
+        for(angle = 0; angle < 90; angle++){
+            Vx = VI0*cos(angle+90*pi/180);
+            Vy = VI0*sin(angle+90*pi/180);
+            x = 0.0;
+            y = 0.0;
+            x2 = 0.0;
+            y2 = 0.0;
+            for(t = 0; ; t++){
+                x2 = Vx1*(t+2);
+                y2 = Yo + Vy2*(t+2) -(0.5*G*(t+2)*(t+2));
+                x = Vx*t;
+                y = Yo + Vy*t -(0.5*G*t*t);
+                float Rang=disparo_d->getRang();
+                if(disparo_d->impacto(x,y,x2,y2,Rang)){
+                    if(y<0) y = 0;
+                    print(VI0,t,x,y,angle);
+                    flag += 1;
+                    VI0 += 50;
+                    break;
+                }
+                if(y < 0){
+                    break;
+                }
+            }
+            if(flag == 3) break;
+
+        }
+        if(flag == 3) break;
+    }
+    if(flag != 3){
+        cout << "No impacto en los disparos esperados"<< endl;
+    }
+}
