@@ -52,21 +52,25 @@ int main()
             system("pause");
             system("cls");
         }
+            break;
         case 4:{
             DisparoDefensivo3(0,ofensivo->getHi(),defensivo->getD(),defensivo->getHi(),31,85);
             system("pause");
             system("cls");
         }
+            break;
         case 0:{
             system("cls");
             cout<<"***Hasta luego***"<<endl;
             simulacion=false;
         }
+            break;
         default:{
             cout<<"***Opcion invalida"<<endl;
             system("pause");
             system("cls");
         }
+            break;
 
         }
     }
@@ -126,7 +130,7 @@ void DisparoOfensivo(int Xd,int Yd,int Xo, int Yo)
         }
         if(flag == 3) break;
     }
-    if(flag != 3){
+    if(flag < 3){
         cout << "No impacto en los disparos esperados"<< endl;
     }
 }
